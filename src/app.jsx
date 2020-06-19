@@ -17,9 +17,9 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { Alert, Card, CardHead, CardHeader, CardHeadMain, Title } from '@patternfly/react-core';
 import cockpit from 'cockpit';
 import React from 'react';
-import { Alert, Card, CardHead, CardHeader, CardHeadMain, Title } from '@patternfly/react-core';
 import './app.scss';
 
 const _ = cockpit.gettext;
@@ -39,7 +39,7 @@ export class Application extends React.Component {
             <Card>
                 <CardHead>
                     <CardHeadMain>
-                        <Title headingLevel="h2" size="3xl">Starter Kit</Title>
+                        <Title headingLevel="h2" size="3xl">Blog Kit</Title>
                     </CardHeadMain>
                 </CardHead>
                 <CardHeader>

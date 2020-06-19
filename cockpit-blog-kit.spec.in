@@ -1,10 +1,10 @@
-Name: cockpit-starter-kit
+Name: cockpit-blog-kit
 Version: %{VERSION}
 Release: 1%{?dist}
-Summary: Cockpit Starter Kit Example Module
+Summary: Cockpit Blog Kit Example Module
 License: LGPLv2+
 
-Source: cockpit-starter-kit-%{version}.tar.gz
+Source: cockpit-blog-kit-%{version}.tar.gz
 BuildArch: noarch
 BuildRequires:  libappstream-glib
 
@@ -13,10 +13,10 @@ Requires: cockpit-system
 %define debug_package %{nil}
 
 %description
-Cockpit Starter Kit Example Module
+Cockpit Blog Kit Example Module
 
 %prep
-%setup -n cockpit-starter-kit
+%setup -n cockpit-blog-kit
 
 %install
 %make_install

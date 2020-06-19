@@ -18,9 +18,9 @@ class TestApplication(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.login_and_go("/starter-kit")
+        self.login_and_go("/blog-kit")
         # verify expected heading
-        b.wait_text("h2.pf-c-title", "Starter Kit")
+        b.wait_text("h2.pf-c-title", "Blog Kit")
 
         # verify expected host name
         hostname = m.execute("hostname").strip()
@@ -43,10 +43,10 @@ class TestApplication(testlib.MachineCase):
         b.reload(ignore_cache=True)
         b.wait_present("#content")
         # menu label (from manifest) should be translated
-        b.wait_text("#host-apps a[href='/starter-kit']", "Bausatz")
+        b.wait_text("#host-apps a[href='/blog-kit']", "Bausatz")
 
-        b.go("/starter-kit")
-        b.enter_page("/starter-kit")
+        b.go("/blog-kit")
+        b.enter_page("/blog-kit")
         # page label (from js) should be translated
         b.wait_in_text("h4.pf-c-alert__title", "Läuft auf")
 

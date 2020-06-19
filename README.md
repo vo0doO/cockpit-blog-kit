@@ -1,4 +1,4 @@
-# Cockpit Starter Kit
+# Cockpit Blog Kit
 
 Scaffolding for a [Cockpit](http://www.cockpit-project.org) module.
 
@@ -8,8 +8,8 @@ Make sure you have `npm` available (usually from your distribution package).
 These commands check out the source and build it into the `dist/` directory:
 
 ```
-git clone https://github.com/cockpit-project/starter-kit.git
-cd starter-kit
+git clone https://github.com/cockpit-project/blog-kit.git
+cd blog-kit
 make
 ```
 
@@ -27,7 +27,7 @@ tree. To do that, link that to the location were `cockpit-bridge` looks for pack
 
 ```
 mkdir -p ~/.local/share/cockpit
-ln -s `pwd`/dist ~/.local/share/cockpit/starter-kit
+ln -s `pwd`/dist ~/.local/share/cockpit/blog-kit
 ```
 
 After changing the code and running `make` again, reload the Cockpit page in
@@ -45,7 +45,7 @@ or
 
 # Running eslint
 
-Cockpit Starter Kit uses [ESLint](https://eslint.org/) to automatically check
+Cockpit Blog Kit uses [ESLint](https://eslint.org/) to automatically check
 JavaScript code style in `.js` and `.jsx` files.
 
 The linter is executed within every build as a webpack preloader.
@@ -82,12 +82,12 @@ You can also run the test against a different Cockpit image, for example:
 
 # Customizing
 
-After cloning the Starter Kit you should rename the files, package names, and
+After cloning the Blog Kit you should rename the files, package names, and
 labels to your own project's name. Use these commands to find out what to
 change:
 
-    find -iname '*starter*'
-    git grep -i starter
+    find -iname '*blog*'
+    git grep -i blog
 
 # Automated release
 
@@ -99,13 +99,13 @@ a project is to create a signed tag for the version number; pushing the tag
 then triggers a GitHub webhook that calls a set of release scripts (on
 Cockpit's CI infrastructure).
 
-starter-kit includes an example [cockpitous release script](./cockpituous-release)
+blog-kit includes an example [cockpitous release script](./cockpituous-release)
 that builds an upstream release tarball and source RPM. Please see the above
 cockpituous documentation for details.
 
 # Further reading
 
- * The [Starter Kit announcement](http://cockpit-project.org/blog/cockpit-starter-kit.html)
+ * The [Blog Kit announcement](http://cockpit-project.org/blog/cockpit-blog-kit.html)
    blog post explains the rationale for this project.
  * [Cockpit Deployment and Developer documentation](http://cockpit-project.org/guide/latest/)
  * [Make your project easily discoverable](http://cockpit-project.org/blog/making-a-cockpit-application.html)
