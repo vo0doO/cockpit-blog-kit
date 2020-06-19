@@ -1,111 +1,111 @@
-# Cockpit Blog Kit
+# Стартовый комплект пакета для кабины
 
-Scaffolding for a [Cockpit](http://www.cockpit-project.org) module.
+Леса для строительства пакета кабины [Cockpit](http://www.cockpit-project.org) модульСтартовый комплект кабины.
 
-# Getting and building the source
+# Получение и сборка источника
 
-Make sure you have `npm` available (usually from your distribution package).
-These commands check out the source and build it into the `dist/` directory:
+Убедитесь, что у вас есть `npm` (обычно из вашего дистрибутива).
+Эти команды проверяют исходный код и встраивают его в каталог `dist /`:
 
 ```
-git clone https://github.com/cockpit-project/blog-kit.git
-cd blog-kit
+git clone https://github.com/cockpit-project/starter-kit.git
+cd starter-kit
 make
 ```
 
-# Installing
+# Установка
 
-`make install` compiles and installs the package in `/usr/share/cockpit/`. The
-convenience targets `srpm` and `rpm` build the source and binary rpms,
-respectively. Both of these make use of the `dist-gzip` target, which is used
-to generate the distribution tarball. In `production` mode, source files are
-automatically minified and compressed. Set `NODE_ENV=production` if you want to
-duplicate this behavior.
+`make install` компилирует и устанавливает пакет в` / usr / share / cockpit / `.
+вспомогательные цели `srpm` и`rpm` создают исходные и двоичные rpms,
+соответственно. Оба они используют цель `dist-gzip`, которая используется
+сгенерировать дистрибутив тарбола. В режиме `production` исходные файлы
+автоматически минимизируется и сжимается. Установите `NODE_ENV = production`, если хотите
+продублируйте это поведение.
 
-For development, you usually want to run your module straight out of the git
-tree. To do that, link that to the location were `cockpit-bridge` looks for packages:
+Для разработки вы обычно хотите запустить свой модуль прямо из Git
+дерево. Чтобы сделать это, свяжите это с местоположением, где "кокпит-мост" ищет пакеты:
 
 ```
 mkdir -p ~/.local/share/cockpit
-ln -s `pwd`/dist ~/.local/share/cockpit/blog-kit
+ln -s `pwd`/dist ~/.local/share/cockpit/starter-kit
 ```
 
-After changing the code and running `make` again, reload the Cockpit page in
-your browser.
+После изменения кода и повторного запуска make выполните перезагрузку страницы Cockpit в
+ваш браузер
 
-You can also use
-[watch mode](https://webpack.js.org/guides/development/#using-watch-mode) to
-automatically update the webpack on every code change with
+Вы также можете использовать
+[см. режим](https://webpack.js.org/guides/development/#using-watch-mode) в
+автоматически обновлять веб-пакет при каждом изменении кода с
 
-    $ npm run watch
+    npm run watch
 
 or
 
-    $ make watch
+    make watch
 
-# Running eslint
+# Бегущий Эслинт
 
-Cockpit Blog Kit uses [ESLint](https://eslint.org/) to automatically check
-JavaScript code style in `.js` and `.jsx` files.
+Начальный комплект Cockpit использует [ESLint](https://eslint.org/) для автоматической проверки
+Стиль кода JavaScript в файлах `.js` и`.jsx`.
 
-The linter is executed within every build as a webpack preloader.
+Линтер выполняется в каждой сборке как предварительный загрузчик веб-пакетов.
 
-For developer convenience, the ESLint can be started explicitly by:
+Для удобства разработчика ESLint может быть запущен явно:
 
-    $ npm run eslint
+    npm run eslint
 
-Violations of some rules can be fixed automatically by:
+Нарушения некоторых правил могут быть устранены автоматически:
 
-    $ npm run eslint:fix
+    npm run eslint:fix
 
-Rules configuration can be found in the `.eslintrc.json` file.
+Конфигурацию правил можно найти в файле `.eslintrc.json`.
 
-# Automated Testing
+# Автоматизированное тестирование
 
-Run `make check` to build an RPM, install it into a standard Cockpit test VM
-(centos-7 by default), and run the test/check-application integration test on
-it. This uses Cockpit's Chrome DevTools Protocol based browser tests, through a
-Python API abstraction. Note that this API is not guaranteed to be stable, so
-if you run into failures and don't want to adjust tests, consider checking out
-Cockpit's test/common from a tag instead of master (see the `test/common`
-target in `Makefile`).
+Запустите `make check` для сборки RPM, установите его на стандартную тестовую виртуальную машину Cockpit
+(centos-7 по умолчанию) и запустите интеграционный тест test / check-application на
+Это. Для этого используются браузерные тесты Cockpit на основе Chrome DevTools Protocol, через
+Python API абстракция. Обратите внимание, что этот API не гарантированно стабилен, поэтому
+если вы столкнулись с ошибками и не хотите настраивать тесты, рассмотрите возможность проверки
+Тест кокпита / общий от тега вместо главного (см. `Тест / общий`)
+цель в `Makefile`).
 
-After the test VM is prepared, you can manually run the test without rebuilding
-the VM, possibly with extra options for tracing and halting on test failures
-(for interactive debugging):
+После того, как тестовая виртуальная машина подготовлена, вы можете вручную запустить тест без перестроения
+ВМ, возможно, с дополнительными опциями для отслеживания и остановки при сбое теста
+(для интерактивной отладки):
 
     TEST_OS=centos-7 test/check-application -tvs
 
-You can also run the test against a different Cockpit image, for example:
+Вы также можете запустить тест для другого образа кокпита, например:
 
     TEST_OS=fedora-32 make check
 
-# Customizing
+# Пользовательская настройка
 
-After cloning the Blog Kit you should rename the files, package names, and
-labels to your own project's name. Use these commands to find out what to
-change:
+После клонирования Starter Kit необходимо переименовать файлы, имена пакетов и
+ярлыки к названию вашего собственного проекта. Используйте эти команды, чтобы узнать, что
+изменение:
 
-    find -iname '*blog*'
-    git grep -i blog
+    find -iname '*starter*'
+    git grep -i starter
 
-# Automated release
+# Автоматизированный выпуск
 
-Once your cloned project is ready for a release, you should consider automating
-that.  [Cockpituous release](https://github.com/cockpit-project/cockpituous/tree/master/release)
-aims to fully automate project releases to GitHub, Fedora, Ubuntu, COPR, Docker
-Hub, and other places. The intention is that the only manual step for releasing
-a project is to create a signed tag for the version number; pushing the tag
-then triggers a GitHub webhook that calls a set of release scripts (on
-Cockpit's CI infrastructure).
+Как только ваш клонированный проект будет готов к выпуску, вы должны подумать об автоматизации
+который. [Рецепт освобождения](https://github.com/cockpit-project/cockpituous/tree/master/release)
+стремится полностью автоматизировать релизы проектов для GitHub, Fedora, Ubuntu, COPR, Docker
+Хаб и другие места. Намерение состоит в том, что единственный ручной шаг для выпуска
+проект должен создать подписанный тег для номера версии; толкая тег
+затем запускает GitHub webhook, который вызывает набор сценариев выпуска (на
+Инфраструктура КИ кабины).
 
-blog-kit includes an example [cockpitous release script](./cockpituous-release)
-that builds an upstream release tarball and source RPM. Please see the above
-cockpituous documentation for details.
+стартовый комплект включает в себя пример [сценарий выпуска кокпита](./ cockpituous-release)
+это создает tarball и исходный RPM-релиз. Пожалуйста, смотрите выше
+кучная документация для деталей.
 
-# Further reading
+# дальнейшее чтение
 
- * The [Blog Kit announcement](http://cockpit-project.org/blog/cockpit-blog-kit.html)
-   blog post explains the rationale for this project.
- * [Cockpit Deployment and Developer documentation](http://cockpit-project.org/guide/latest/)
- * [Make your project easily discoverable](http://cockpit-project.org/blog/making-a-cockpit-application.html)
+* [Объявление Starter Kit](http://cockpit-project.org/blog/cockpit-starter-kit.html)
+   сообщение в блоге объясняет обоснование этого проекта.
+* [Документация по развертыванию кабины экипажа и разработчику](http://cockpit-project.org/guide/latest/)
+* [Сделайте ваш проект легко обнаруживаемым](http://cockpit-project.org/blog/making-a-cockpit-application.html)

@@ -1,9 +1,9 @@
 #!/bin/sh
-# image-customize script to enable cockpit in test VMs
-# The application RPM will be installed separately
+# сценарий настройки изображения для включения кабины в тестовых виртуальных машинах
+# RPM приложения будут установлены отдельно
 set -eu
 
-# don't force https:// (self-signed cert)
+# не форсируйте https: // (самоподписанный сертификат)
 printf "[WebService]\\nAllowUnencrypted=true\\n" > /etc/cockpit/cockpit.conf
 
 if type firewall-cmd >/dev/null 2>&1; then
@@ -11,5 +11,5 @@ if type firewall-cmd >/dev/null 2>&1; then
 fi
 systemctl enable cockpit.socket
 
-# HACK: See https://github.com/cockpit-project/cockpit/issues/14133
+# HACK: см. https://github.com/cockpit-project/cockpit/issues/14133
 mkdir -p /usr/share/cockpit/packagekit

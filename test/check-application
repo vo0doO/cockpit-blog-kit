@@ -1,16 +1,17 @@
 #!/usr/bin/python3
-# Run this with --help to see available options for tracing and debugging
-# See https://github.com/cockpit-project/cockpit/blob/master/test/common/testlib.py
-# "class Browser" and "class MachineCase" for the available API.
+# Запустите это с --help, чтобы увидеть доступные опции для трассировки и отладки.
+# См. Https://github.com/cockpit-project/cockpit/blob/master/test/common/testlib.py.
+# «Class Browser» и «Class MachineCase» для доступного API.
 
 import os
 import sys
 
-# import Cockpit's machinery for test VMs and its browser test API
+import testlib
+
+# импортировать оборудование Cockpit для тестовых виртуальных машин и его API для тестирования браузера
 TEST_DIR = os.path.dirname(__file__)
 sys.path.append(os.path.join(TEST_DIR, "common"))
 sys.path.append(os.path.join(os.path.dirname(TEST_DIR), "bots/machine"))
-import testlib
 
 
 class TestApplication(testlib.MachineCase):
@@ -19,19 +20,19 @@ class TestApplication(testlib.MachineCase):
         m = self.machine
 
         self.login_and_go("/blog-kit")
-        # verify expected heading
+        # проверить ожидаемый заголовок
         b.wait_text("h2.pf-c-title", "Blog Kit")
 
-        # verify expected host name
+        # проверить ожидаемое имя хоста
         hostname = m.execute("hostname").strip()
         b.wait_in_text("h4.pf-c-alert__title", "Running on " + hostname)
 
-        # change current hostname
+        # изменить текущее имя хоста
         m.execute("echo new-%s > /etc/hostname" % hostname)
-        # verify new hostname name
+        # подтвердить новое имя хоста
         b.wait_in_text("h4.pf-c-alert__title", "Running on new-" + hostname)
 
-        # change language to German
+        # изменить язык на немецкий
         b.switch_to_top()
         b.click("#navbar-dropdown")
         b.click(".display-language-menu a")
@@ -39,15 +40,15 @@ class TestApplication(testlib.MachineCase):
         b.set_val("#display-language select", "de-de")
         b.click("#display-language-select-button")
         b.expect_load()
-        # HACK: work around language switching in Chrome not working in current session (Cockpit issue #8160)
+        # HACK: обходной путь переключения языков в Chrome, не работающем в текущем сеансе (выпуск кабины № 8160)
         b.reload(ignore_cache=True)
         b.wait_present("#content")
-        # menu label (from manifest) should be translated
+        # метка меню (из манифеста) должна быть переведена
         b.wait_text("#host-apps a[href='/blog-kit']", "Bausatz")
 
         b.go("/blog-kit")
         b.enter_page("/blog-kit")
-        # page label (from js) should be translated
+        # метка страницы (от js) должна быть переведена
         b.wait_in_text("h4.pf-c-alert__title", "Läuft auf")
 
 if __name__ == '__main__':
