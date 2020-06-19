@@ -1,7 +1,7 @@
 Name: cockpit-blog-kit
 Version: %{VERSION}
 Release: 1%{?dist}
-Summary: Cockpit Blog Kit Example Module
+Summary: Пример модуля блога кокпита
 License: LGPLv2+
 
 Source: cockpit-blog-kit-%{version}.tar.gz
@@ -13,7 +13,7 @@ Requires: cockpit-system
 %define debug_package %{nil}
 
 %description
-Cockpit Blog Kit Example Module
+Пример модуля блога кокпита
 
 %prep
 %setup -n cockpit-blog-kit
@@ -22,7 +22,7 @@ Cockpit Blog Kit Example Module
 %make_install
 appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/metainfo/*
 
-# drop source maps, they are large and just for debugging
+# уронить исходные карты, они большие и просто для отладки
 find %{buildroot}%{_datadir}/cockpit/ -name '*.map' | xargs rm --verbose
 
 %files

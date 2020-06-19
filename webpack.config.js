@@ -9,14 +9,14 @@ var externals = {
     "cockpit": "cockpit",
 };
 
-/* These can be overridden, typically from the Makefile.am */
+/* Они могут быть отменены, как правило, из Makefile.am */
 const srcdir = (process.env.SRCDIR || __dirname) + path.sep + "src";
 const builddir = (process.env.SRCDIR || __dirname);
 const distdir = builddir + path.sep + "dist";
 const section = process.env.ONLYDIR || null;
 const nodedir = path.resolve((process.env.SRCDIR || __dirname), "node_modules");
 
-/* A standard nodejs and webpack pattern */
+/* Стандартный nodejs и шаблон webpack */
 var production = process.env.NODE_ENV === 'production';
 
 var info = {
@@ -38,11 +38,11 @@ var output = {
 };
 
 /*
- * Note that we're avoiding the use of path.join as webpack and nodejs
- * want relative paths that start with ./ explicitly.
+ * Обратите внимание, что мы избегаем использования path.join в качестве webpack и nodejs
+ * хочу относительные пути, которые начинаются с ./ явно.
  *
- * In addition we mimic the VPATH style functionality of GNU Makefile
- * where we first check builddir, and then srcdir.
+ * Кроме того, мы имитируем функциональность в стиле VPATH в GNU Makefile
+ * где мы сначала проверяем builddir, а затем srcdir.
  */
 
 function vpath(/* ... */) {
@@ -54,7 +54,7 @@ function vpath(/* ... */) {
     return expanded;
 }
 
-/* Qualify all the paths in entries */
+/* Уточните все пути в записях */
 Object.keys(info.entries).forEach(function(key) {
     if (section && key.indexOf(section) !== 0) {
         delete info.entries[key];
@@ -69,7 +69,7 @@ Object.keys(info.entries).forEach(function(key) {
     });
 });
 
-/* Qualify all the paths in files listed */
+/* Укажите все пути в файлах в списке */
 var files = [];
 info.files.forEach(function(value) {
     if (!section || value.indexOf(section) === 0)
@@ -82,9 +82,9 @@ var plugins = [
     new extract({filename: "[name].css"})
 ];
 
-/* Only minimize when in production mode */
+/* Минимизировать только в режиме производства */
 if (production) {
-    /* Rename output files when minimizing */
+    /* Переименовать выходные файлы при сворачивании */
     output.filename = "[name].min.js";
 
     plugins.unshift(new CompressionPlugin({
@@ -135,7 +135,7 @@ module.exports = {
                 use: babel_loader,
                 test: /\.(js|jsx)$/
             },
-            /* HACK: remove unwanted fonts from PatternFly's css */
+            /* HACK: удалить ненужные шрифты из PatternFly's css */
             {
                 test: /patternfly-4-cockpit.scss$/,
                 use: [
